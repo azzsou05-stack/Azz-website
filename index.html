@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" id="html-root">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kali — Site Launched</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #0f172a;
+      color: #f8fafc;
+      font-family: -apple-system, "Segoe UI", Tahoma, Arial, sans-serif;
+      text-align: center;
+      padding: 2rem;
+    }
+    .card {
+      max-width: 480px;
+    }
+    .badge {
+      display: inline-block;
+      background: #16a34a;
+      color: #f0fdf4;
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 0.3rem 0.8rem;
+      border-radius: 999px;
+      margin-bottom: 1.2rem;
+      letter-spacing: 0.03em;
+    }
+    h1 {
+      font-size: 2rem;
+      margin: 0 0 0.5rem;
+    }
+    p {
+      color: #94a3b8;
+      line-height: 1.6;
+    }
+    .lang-switch {
+      margin-top: 2rem;
+      display: flex;
+      gap: 0.5rem;
+      justify-content: center;
+    }
+    .lang-switch button {
+      background: transparent;
+      border: 1px solid #334155;
+      color: #cbd5e1;
+      padding: 0.4rem 0.9rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.85rem;
+    }
+    .lang-switch button.active {
+      background: #f8fafc;
+      color: #0f172a;
+      border-color: #f8fafc;
+    }
+    [dir="rtl"] body { text-align: right; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <span class="badge" data-i18n="badge">SITE LIVE</span>
+    <h1 data-i18n="title">Website successfully launched</h1>
+    <p data-i18n="desc">This is a placeholder page confirming the site is online. Content will be updated soon.</p>
+    <div class="lang-switch">
+      <button onclick="setLang('en')" id="btn-en" class="active">English</button>
+      <button onclick="setLang('ar')" id="btn-ar">العربية</button>
+    </div>
+  </div>
+
+  <script>
+    const translations = {
+      en: {
+        badge: "SITE LIVE",
+        title: "Website successfully launched",
+        desc: "This is a placeholder page confirming the site is online. Content will be updated soon.",
+        dir: "ltr"
+      },
+      ar: {
+        badge: "الموقع يعمل",
+        title: "تم إطلاق الموقع بنجاح",
+        desc: "هذه صفحة مؤقتة تؤكد أن الموقع يعمل. سيتم تحديث المحتوى قريباً.",
+        dir: "rtl"
+      }
+    };
+
+    function setLang(lang) {
+      const t = translations[lang];
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        el.textContent = t[el.getAttribute('data-i18n')];
+      });
+      document.getElementById('html-root').setAttribute('lang', lang);
+      document.getElementById('html-root').setAttribute('dir', t.dir);
+      document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+      document.getElementById('btn-ar').classList.toggle('active', lang === 'ar');
+    }
+  </script>
+</body>
+</html>
